@@ -1,5 +1,10 @@
 {% extends "notes/base.html" %}
 
+{% block note_detail_link %}
+<a class="nav-item nav-link" href="#">Delete Note {{object.title}}</a>
+{% endblock %}
+
+
 {% block content %}
 
     	<div class="content-section">

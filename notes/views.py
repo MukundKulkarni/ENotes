@@ -5,20 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-"""notifications =[{
-
-	'author' : 'ABCD',
-	'title': 'python notes',
-	'content': 'notes content',
-	'shared_date' : 'december 31,2018'},
-	{
-      'author' : 'WXYZ',
-	'title': 'Remainder notes',
-	'content': 'notes content',
-	'shared_date' : 'jan 01,2019'
-	},
-	]"""
-notifications = []
 
 @login_required
 def home(request):
@@ -42,22 +28,11 @@ class PostListView(LoginRequiredMixin,ListView):
 		return notes.objects.filter(author_id = user_id).order_by('-date_posted')
 
 
-"""class UserPostListView(LoginRequiredMixin,ListView):
-	model = notes
-	template_name = 'notes/user_notes.html'
-	context_object_name = 'posts'
-	paginate_by = 10
-	def get_queryset(self):
-		user =get_object_or_404(User,username = self.kwargs.get('username'))
-		return notes.objects.filter(author = user).order_by('-date_posted')"""
-
-
 class PostDetailView(LoginRequiredMixin,DetailView):
 	model = notes
 	queryset = notes.objects.filter()
 
-class PostCreateView(LoginRequiredMixin,
-	CreateView):
+class PostCreateView(LoginRequiredMixin,CreateView):
 	model = notes
 	fields =['title','content']
 
